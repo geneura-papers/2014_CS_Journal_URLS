@@ -1,0 +1,183 @@
+\documentclass[preprint]{elsarticle}
+\biboptions{round, numbers}
+\usepackage[latin1]{inputenc}
+%\usepackage[T1]{fontenc}
+%\usepackage{textcomp}
+\usepackage{graphicx}
+%\usepackage{color}
+%\usepackage{setspace}
+\usepackage{url}
+\usepackage[english]{babel}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   TITLE   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{[TENTATIVE] Can I navigate this web? Controlling URL accesses in the enterprise by means of categorical classifiers}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   AUTHORS   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\author{P. de las Cuevas, A.M. Mora, J.J. Merelo}
+\ead{\{paloma, amorag, jmerelo\}@geneura.ugr.es}
+\address{Departamento de Arquitectura y Tecnología de Computadores.\\ ETSIIT - CITIC. University of Granada, Spain}
+%\author{A. M. Mora}
+%\ead{amorag@geneura.ugr.es}
+%\address{Departamento de Arquitectura y Tecnología de Computadores. Escuela Técnica Superior de Ingenierías Informática y de Telecomunicación. CITIC. University of Granada, Spain}
+
+%\maketitle
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   ABSTRACT   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\begin{abstract} 
+
+\end{abstract}
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   KEYWORDS   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\begin{keyword}
+Black List \sep White Lists \sep Data Mining \sep Corporate Security Policies \sep URL request\sep Machine Learning \sep Classification.
+\end{keyword}
+
+\end{frontmatter}
+
+
+%-------------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   INTRODUCTION   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------------------
+
+\section{Introduction}
+\label{sec:intro}
+
+
+%----------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%   BACKGROUND AND RELATED WORK %%%%%%%%%%%%%%%%%%%%%%%
+%----------------------------------------------------------------------------
+
+\section{Background and related work}
+\label{sec:background_sota}
+
+*** Esta sección presentará conceptos de seguridad en la empresa, así como conceptos de machine learning y sus aplicaciones dentro de la seguridad corporativa, en concreto en aproximaciones similares a esta
+
+*** Hay que diferenciar este trabajo de los existentes y destacar su avance en el estado del arte
+
+%---------------------------------------------------------------------
+%\subsection{Corporate Security}
+%\label{subsec:corporatesecurity}
+
+%---------------------------------------------------------------------
+%\subsection{Machine Learning}
+%\label{subsec:dm+ml}
+
+
+
+%-------------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  PROBLEM DEFINITION  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------------------
+
+\section{Problem definition}
+\label{sec:problem_data}
+
+*** Definir el problema a resolver y describir los datos que se van a manejar en el mismo.
+
+%----------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   METODOLOGY  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------------------------------------------------------------
+
+\section{Metodology}
+\label{sec:metodology}
+
+*** Describir la metodología a seguir para la creación de los juegos de datos:
+- preprocesado
+- etiquetado para componer datos a clasificar
+- técnicas de balanceo
+
+*** Describir los 3 grandes bloques y justificarlos:
+- Datos iniciales
+- Características extraídas
+- Sesiones
+
+%---------------------------------------------------------------------
+\subsection{Initial Data}
+\label{subsec:initial_data}
+
+*** Describir los primeros datos y procesamientos (eliminar duplicados, agrupar redundantes, etc)
+
+
+%---------------------------------------------------------------------
+\subsection{Extracting Features}
+\label{subsec:extracting_features}
+
+*** Describir y justificar las características extraídas de los datos iniciales.
+
+%---------------------------------------------------------------------
+\subsection{Grouping in Sessions}
+\label{subsec:sessions}
+
+*** Describir y justificar el proceso de agrupamiento en sesiones
+
+
+
+%----------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%   EXPERIMENTS AND RESULTS  %%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------------------------------------------------------------
+
+\section{Experiments and Results}
+\label{sec:experiments}
+
+*** Describir los experimentos realizados, en cada bloque.
+*** Analizar los resultados obtenidos en cada bloque
+
+%---------------------------------------------------------------------
+\subsection{Initial Data Results}
+\label{subsec:initial_data_results}
+
+*** Experimentos y resultados sobre el conjunto original y los conjuntos 'refinados' (TLD, sin duplicados, etc)
+
+
+%---------------------------------------------------------------------
+\subsection{Extracted Features Results}
+\label{subsec:extracted_features_results}
+
+*** Experimentos y resultados sobre el conjunto con las nuevas características
+
+
+%---------------------------------------------------------------------
+\subsection{Sessions Results}
+\label{subsec:sessions_results}
+
+*** Experimentos y resultados sobre el conjunto agrupando por sesiones
+
+
+
+%----------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   DISCUSSION  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------------------------------------------------------------
+
+\section{Discussion}
+\label{sec:discussion}
+
+*** Comentar los resultados de cada método y analizar las ventajas e inconvenientes de cada uno, así como las mejoras que se hayan conseguido con la extracción de características y el agrupamiento por sesiones
+
+
+%----------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   CONCLUSIONS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------------------------------------------------------------
+
+\section{Conclusions and Future Work}
+\label{sec:conclusions}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ACKNOWLEDGEMENTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Acknowledgements}
+This work has been supported by the European project MUSES (FP7-318508).
+
+\bibliographystyle{elsarticle-num}
+\bibliography{review_muses,data_mining_urls,ci_security_rules}
+
+\end{document}
