@@ -55,14 +55,63 @@ Black List \sep White Lists \sep Data Mining \sep Corporate Security Policies \s
 
 The concept of Security inside an Enterprise can be addressed from the point of view of the Internet connections that are daily being made. The employees who make these might have working purposes or not. The Enterprise, which is aware of this situation, wants to reduce the risks of security attacks introduced by some non trustworthy websites. Then, on a second level, but still important, companies want their employees to not to have their productivity decreased.
 
-Above all the security tools that enterprises normally use, in this paper we focus in those named as Blacklists and Whitelists. Their use is widely extended, as they are easy to maintain, and each one has its advantages and disadvantages. The use of both highly increases the security in a company.
-Indeed it is true that both Blacklists and Whitelists are easy to update or to maintain, because each day, new bad sites are reported. But at the same time, new sites (dangerous or not) are created. Netcraft reports from November shows that there are about 950 million active websites.
-
-% Estadísticas de -> \cite{netcraft:site}
+Above all the security tools that enterprises normally use, in this paper we want to focus on those named as Blacklists and Whitelists. Their use is widely extended, as they are easy to maintain, and each one has its advantages and disadvantages. The use of both highly increases the security in a company.
+Indeed it is true that both Blacklists and Whitelists are easy to update or to maintain, because every day, new bad sites are reported. But at the same time, new sites (dangerous or not) are created. Netcraft reports from November \cite{netcraft:site} show that there are about 950 million active websites. But McAfee reported \cite{mcafee:site} that, at the end of the first quarter of 2014, there were more than 18 million new suspect URLs (2 million associated domains), and also more than 250 thousand new pishing URL (almost 150 thousand associated domains).
 
 With this scenario, companies need to be able to update their Blacklists and Whitelists not only by what is reported by security servers but also by learning from the connections that the employees made in the past and were known as dangerous. This way, anomalous situations can be detected and also classified as candidates for the Blacklist or the Whitelist.
 
-This work shows that this can be achieved by using categorical classifiers.
+This work shows that this can be achieved by using categorical classifiers. It is possible to gather information from the log files that the companies proxies store, and also from the set of Company Security Policies (CSPs), in order to be able of label the entries of the log and obtain a data set. That data set has been the one used for training and testing a set of chosen classifiers, being all of them capable of support categorical data given the nature of the information in a URL connection log file. We will show how the classifiers have obtained rules, for classifying unknown URLs, that are built with more antecedents than the URL only, as normal Black and White lists do.
+
+The paper is structured as follows...
+
+%----------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%   BACKGROUND AND RELATED WORK %%%%%%%%%%%%%%%%%%%%%%%
+%----------------------------------------------------------------------------
+
+\section{Background and related work}
+\label{sec:background_sota}
+
+%*** Esta sección presentará conceptos de seguridad en la empresa, así como conceptos de machine learning y sus aplicaciones dentro de la seguridad corporativa, en concreto en aproximaciones similares a esta
+%Creo que no tiene que ver y es repetir lo mismo all over again
+
+*** Hay que diferenciar este trabajo de los existentes y destacar su avance en el estado del arte
+
+%Network and internet security in enterprises
+%URL classification
+
+As in this work we are dedicating an important part to URL, its different parts and the way they influence in the classification process, this section is devoted to review some works related with the study of URLs. In particular, we found interesting those works that try to identify malicious sites (like the ones that want to perform a pishing attack). It is also interesting if they study the URL lexical features, like the one performed during this Master Thesis, and because we consider this kind of study better than to download and proccess the page (the thing that in fact is trying to be avoided). 
+
+Hence, Kan and Thi \cite{Kan_URL05} focus their work in lexical features in order to classify as dangerous, URLs that were not previously in Blacklists servers. They gather features like the URI components, length, ortographic data, or segments by entropy reduction. Their results are close to 95\% of accuracy.
+
+On the other hand, this work not only focuses in lexical features of the requested URL, but also in other data that appears in the log files. And not exactly log data but Zhang et al. \cite{Zhang_cantina07}, with CANTINA, detect pishing URLs by studying lexical features, content related features, and a WHOIS query (obtaining the date when the domain were registered, which if it is too new, it can be less trustful). They also obtain a 95\% of accuracy.
+
+The most important work we have found related to this were of J. Ma et al \cite{Ma_Url11}, whose aim is to detect malicious URLs, mainly related with pishing attacks throug e-mailing, but without processing the content or other private data of the user. They extract information from the lexical features (62\% of the total of the gathered features), and also from the host that has the URL. It is important to point out that they perform the study over 100 days, and that they work with a quantity of almost 2 million of features. In addition, they implement an online classifier (instead of a batch one), and obtain a 99\% of accuracy. 
+
+%Crime data mining and forensics in enterprise (?)
+
+On the one hand, DM helped to develop new solutions to computer forensics \cite{DeVel2001}, being the researchers able to extract information from large files with events gathered from infected computers. Another important advance took place after the 9/11 events, when \textit{clustering techniques} and \textit{social network analysis} started to be performed in order to detect pontential crime networks \cite{Hsinchun2003}.
+On the other hand, and more focused on the user side like our approach, there exist some user-centric solutions to problems like user authentication in a personal device, who Greenstadt and Beal \cite{cognitive_security_08} proposed to address using collected user biometrics along with machine learning techniques.
+
+%feature extraction
+
+%---------------------------------------------------------------------
+%\subsection{Corporate Security}
+%\label{subsec:corporatesecurity}
+
+%---------------------------------------------------------------------
+%\subsection{Machine Learning}
+%\label{subsec:dm+ml}
+
+
+
+%-------------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  PROBLEM DEFINITION  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------------------
+
+\section{Problem definition}
+\label{sec:problem_data}
+
+*** Definir el problema a resolver y describir los datos que se van a manejar en el mismo.
 
 \begin{table*}[htpb]
 \centering
@@ -114,57 +163,6 @@ This work shows that this can be achieved by using categorical classifiers.
 }
 \end{table*}
 
-
-
-%----------------------------------------------------------------------------
-%%%%%%%%%%%%%%%%%%%%%%%   BACKGROUND AND RELATED WORK %%%%%%%%%%%%%%%%%%%%%%%
-%----------------------------------------------------------------------------
-
-\section{Background and related work}
-\label{sec:background_sota}
-
-%*** Esta sección presentará conceptos de seguridad en la empresa, así como conceptos de machine learning y sus aplicaciones dentro de la seguridad corporativa, en concreto en aproximaciones similares a esta
-%Creo que no tiene que ver y es repetir lo mismo all over again
-
-*** Hay que diferenciar este trabajo de los existentes y destacar su avance en el estado del arte
-
-%Network and internet security in enterprises
-%URL classification
-
-As in this work we are dedicating an important part to URL, its different parts and the way they influence in the classification process, this section is devoted to review some works related with the study of URLs. In particular, we found interesting those works that try to identify malicious sites (like the ones that want to perform a pishing attack). It is also interesting if they study the URL lexical features, like the one performed during this Master Thesis, and because we consider this kind of study better than to download and proccess the page (the thing that in fact is trying to be avoided). 
-
-Hence, Kan and Thi \cite{Kan_URL05} focus their work in lexical features in order to classify as dangerous, URLs that were not previously in Blacklists servers. They gather features like the URI components, length, ortographic data, or segments by entropy reduction. Their results are close to 95\% of accuracy.
-
-On the other hand, this work not only focuses in lexical features of the requested URL, but also in other data that appears in the log files. And not exactly log data but Zhang et al. \cite{Zhang_cantina07}, with CANTINA, detect pishing URLs by studying lexical features, content related features, and a WHOIS query (obtaining the date when the domain were registered, which if it is too new, it can be less trustful). They also obtain a 95\% of accuracy.
-
-The most important work we have found related to this were of J. Ma et al \cite{Ma_Url11}, whose aim is to detect malicious URLs, mainly related with pishing attacks throug e-mailing, but without processing the content or other private data of the user. They extract information from the lexical features (62\% of the total of the gathered features), and also from the host that has the URL. It is important to point out that they perform the study over 100 days, and that they work with a quantity of almost 2 million of features. In addition, they implement an online classifier (instead of a batch one), and obtain a 99\% of accuracy. 
-
-%Crime data mining and forensics in enterprise (?)
-
-On the one hand, DM helped to develop new solutions to computer forensics \cite{DeVel2001}, being the researchers able to extract information from large files with events gathered from infected computers. Another important advance took place after the 9/11 events, when \textit{clustering techniques} and \textit{social network analysis} started to be performed in order to detect pontential crime networks \cite{Hsinchun2003}.
-On the other hand, and more focused on the user side like our approach, there exist some user-centric solutions to problems like user authentication in a personal device, who Greenstadt and Beal \cite{cognitive_security_08} proposed to address using collected user biometrics along with machine learning techniques.
-
-%feature extraction
-
-%---------------------------------------------------------------------
-%\subsection{Corporate Security}
-%\label{subsec:corporatesecurity}
-
-%---------------------------------------------------------------------
-%\subsection{Machine Learning}
-%\label{subsec:dm+ml}
-
-
-
-%-------------------------------------------------------------------------------
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  PROBLEM DEFINITION  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%-------------------------------------------------------------------------------
-
-\section{Problem definition}
-\label{sec:problem_data}
-
-*** Definir el problema a resolver y describir los datos que se van a manejar en el mismo.
-
 %----------------------------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   METODOLOGY  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %----------------------------------------------------------------------------
@@ -196,10 +194,12 @@ On the other hand, and more focused on the user side like our approach, there ex
 *** Describir y justificar las características extraídas de los datos iniciales.
 
 %---------------------------------------------------------------------
-\subsection{Grouping in Sessions}
-\label{subsec:sessions}
+%\subsection{Grouping in Sessions}
+%\label{subsec:sessions}
 
-*** Describir y justificar el proceso de agrupamiento en sesiones
+%*** Describir y justificar el proceso de agrupamiento en sesiones
+
+% Esto al final no entra en este artículo
 
 
 
