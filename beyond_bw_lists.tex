@@ -64,6 +64,55 @@ With this scenario, companies need to be able to update their Blacklists and Whi
 
 This work shows that this can be achieved by using categorical classifiers.
 
+\begin{table*}[htpb]
+\centering
+ \caption{\label{featuretype} Extracted features from each entry of the Log and its dependance or independance on the user behaviour.}
+{\scriptsize
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Feature name} & \textbf{Feature type} & \textbf{Relationship with user behaviour}\\ 
+\hline
+\texttt{http\_reply\_code} & Categorical & Independent \\ 
+\texttt{http\_method} & Categorical & Independent \\ 
+\texttt{duration\_milliseconds} & Numeric & Independent \\
+\texttt{content\_type\_MCT} & Categorical & Independent \\ 
+\texttt{content\_type} & Categorical & Independent \\ 
+\texttt{server\_or\_cache\_address} & Categorical & Independent \\
+\texttt{time} & Date & Dependent \\ 
+\texttt{squid\_hierarchy} & Categorical & Independent \\ 
+\texttt{bytes} & Numeric & Independent \\  
+\texttt{URL\_length} & Numeric & Dependent \\  
+\texttt{letters\_in\_URL} & Numeric & Dependent \\  
+\texttt{digits\_in\_URL} & Numeric & Dependent \\  
+\texttt{nonalphanumeric\_chars\_in\_URL} & Numeric & Dependent \\  
+\texttt{url\_is\_IP} & Boolean & Dependent \\  
+\texttt{url\_has\_subdomains} & Boolean & Dependent \\  
+\texttt{num\_subdomains} & Numeric & Dependent \\  
+\texttt{subdomain5} & Categorical & Dependent \\  
+\texttt{subdomain4} & Categorical & Dependent \\  
+\texttt{subdomain3} & Categorical & Dependent \\  
+\texttt{subdomain2} & Categorical & Dependent \\  
+\texttt{subdomain1} & Categorical & Dependent \\  
+\texttt{url\_core} & Categorical & Dependent \\  
+\texttt{url\_TLD} & Categorical & Dependent \\  
+\texttt{url\_has\_path} & Boolean & Dependent \\  
+\texttt{folder1} & Categorical & Dependent \\  
+\texttt{folder2} & Categorical & Dependent \\  
+\texttt{path\_has\_parameters} & Boolean & Dependent \\  
+\texttt{num\_parameters} & Numeric & Dependent \\  
+\texttt{url\_has\_file\_extension} & Boolean & Dependent \\  
+\texttt{filename\_length} & Numeric & Dependent \\  
+\texttt{letters\_in\_filename} & Numeric & Dependent \\  
+\texttt{digits\_in\_filename} & Numeric & Dependent \\  
+\texttt{other\_char\_in\_filename} & Numeric & Dependent \\  
+\texttt{file\_extension} & Categorical & Dependent \\  
+\texttt{url\_protocol} & Categorical & Dependent \\ 
+\texttt{client\_address} & Categorical & Dependent \\ 
+\texttt{label} & Categorical & Independent \\
+\hline
+\end{tabular}
+}
+\end{table*}
 
 
 
