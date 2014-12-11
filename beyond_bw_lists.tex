@@ -122,11 +122,12 @@ On the other hand, and more focused on the user side like our approach, there ex
 %*** Definir el problema a resolver y describir los datos que se van a manejar en el mismo.
 Being introduced in Section \ref{sec:intro}, the problem this work addresses is to demonstrate that is possible to automatically classify, as allowed or denied, a URL that was not in a Blacklist or a Whitelist. Also, we want that the final application of an `ALLOW' or `DENY' label depends on other features of that URL (lexical, or contextual, for instance), going then a step beyond the Black and White lists.
 
-The data used to demonstrate this consist of: % DETAILS NEEDED
+The data used to demonstrate this has been provided by an actual Spanish company and it has been anonymized. Since our purpose is to have a dataset with a set of connections of which it is already known its permission, we have used two different files:
 
 \begin{itemize}
-   \item A log file with the connections made by employees of an actual Spanish company.
-   \item A set of rules wich decide, mostly depending on the URL core domain, if a connection should be allowed (Whitelist) or denied (Blacklist).
+   \item A log file with the connections made by employees of the company. % ¿El de 2 horas o el de 1 día?
+   This log contains the typical information of an HTTP request, it is gathered by the company Squid proxy, and its format is CSV. 
+   \item A set of rules wich decide, mostly depending on the URL core domain, if a connection should be allowed (Whitelist) or denied (Blacklist). The rules have been provided by the same company.
  \end{itemize} 
 
 \scriptsize
