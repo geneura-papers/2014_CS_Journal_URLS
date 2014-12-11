@@ -133,9 +133,9 @@ The data used to demonstrate this has been provided by an actual Spanish company
 In order to have enough information to train the classifiers, we have taken as features the very same fields that the Squid log provides, being those of an HTTP request: the HTTP reply code and method, the time when the connection was made and how much did it take to the server to answer, the IP addresses of the client and requested server, the content type of the webpage and its size in bytes, and the complete URL string.
 At the same time, the URL has the following structure:
 
-\scriptsize
 \begin{verbatim}
-http://www.subdomain5.....subdomain1.url_core.url_TLD/folder1/.../filename.filename_extension
+http://www.subdomain5.....subdomain1.url_core.url_TLD/folder1/.../
+/filename.filename_extension
 \end{verbatim}
 
 Thus a lot of features can be obtained from the URL string.
