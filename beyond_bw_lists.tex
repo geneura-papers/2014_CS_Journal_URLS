@@ -77,9 +77,17 @@ The paper is structured as follows...
 *** Hay que diferenciar este trabajo de los existentes y destacar su avance en el estado del arte
 
 %Network and internet security in enterprises
+
+
+%Data
+
+The datasets that have been traditionally used for this kind of studies are the original KDD 99 Cup Dataset \cite{kddcup99}, and its improved version NSL KDD \cite{nslkdd}. Both are detailed by Tavallaee, Mahbod et al. \cite{tavallaee2009detailed}, and the first constists of a group of connection logs from a normal network, with simulated attack traffic added. The second version, which may be called as improved or refined, had the same log of connections from the initial dataset, but having removed the redundant traffic. This means that there might have been duplicated records in the original dataset that could mislead the results after the training and testing processes.
+
+In our work we make a similar approach. As will be deeply explained in Section \ref{sec:metodology}, we also removed the duplicated entries from the connections log. However, the main advantage of the data we have used with respect to the others used in previous works, is that we obtained the log directly from an actual company, thus we are working with more accurate datasets than those which include simulated traffic.
+
 %URL classification
 
-As in this work we are dedicating an important part to URL, its different parts and the way they influence in the classification process, this section is devoted to review some works related with the study of URLs. In particular, we found interesting those works that try to identify malicious sites (like the ones that want to perform a pishing attack). It is also interesting if they study the URL lexical features, like the one performed during this Master Thesis, and because we consider this kind of study better than to download and proccess the page (the thing that in fact is trying to be avoided). 
+Also, in this work we are dedicating an important part to URL, its different parts and the way they influence in the classification process. We have reviewed some works related with the study of URLs. In particular, we found interesting those works that try to identify malicious sites (like the ones that want to perform a pishing attack). It is also interesting if they study the URL lexical features, like the one performed during this Master Thesis, and because we consider this kind of study better than to download and proccess the page (the thing that in fact is trying to be avoided). 
 
 Hence, Kan and Thi \cite{Kan_URL05} focus their work in lexical features in order to classify as dangerous, URLs that were not previously in Blacklists servers. They gather features like the URI components, length, ortographic data, or segments by entropy reduction. Their results are close to 95\% of accuracy.
 
