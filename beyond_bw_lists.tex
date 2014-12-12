@@ -120,13 +120,13 @@ On the other hand, and more focused on the user side like our approach, there ex
 \label{sec:problem_data}
 
 %*** Definir el problema a resolver y describir los datos que se van a manejar en el mismo.
-Being introduced in Section \ref{sec:intro}, the problem this work addresses is to demonstrate that is possible to automatically classify, as allowed or denied, a URL that was not in a Blacklist or a Whitelist. Also, we want that the final application of an `ALLOW' or `DENY' label depends on other features of that URL (lexical, or contextual, for instance), going then a step beyond the Black and White lists.
+Being introduced in Section \ref{sec:intro}, the problem this work addresses is the ability of self-adaptation that company network security systems have, for many new dangerous websites emerge every day. Corporate Security Policies (CSPs) may include Black and White lists to cope with dangerous situations, but always for known and already classified websites. Therefore, our goal is to demonstrate that is possible to automatically classify, as allowed or denied, a URL that was not in a Blacklist or a Whitelist. Also, we want that the final application of an `ALLOW' or `DENY' label depends on other features of that URL (lexical, or contextual, for instance), going then a step beyond the Black and White lists.
 
 The data used to demonstrate this has been provided by an actual Spanish company and it has been anonymized. Since our purpose is to have a dataset with a set of connections of which it is already known its permission, we have used two different files:
 
 \begin{itemize}
    \item A log file with the connections made by employees of the company. % ¿El de 2 horas o el de 1 día?
-   This log contains the typical information of an HTTP request, it is gathered by the company Squid proxy, and its format is CSV. 
+   This log contains the typical information of an HTTP request, it is gathered by the company Squid proxy \cite{squid:site}, and its format is CSV. 
    \item A set of rules wich decide, mostly depending on the URL core domain, if a connection should be allowed (Whitelist) or denied (Blacklist). The rules have been provided by the same company.
  \end{itemize} 
 
@@ -139,7 +139,7 @@ http://www.subdomain5.....subdomain1.url_core.url_TLD/folder1/.../
 \end{verbatim}
 
 Thus a lot of features can be obtained from the URL string.
-It is important to point out that, from all the information which can be gathered from each entry of the log, not every field (or feature) is dependant on the user. Table \ref{featuretype} shows the set of initial features extracted from the log of connections. For each feature, its type is indicated and also the dependency with the user. This first study over the features can help to the feature selection, because what matters for identifying non desirable behaviours from the users, would be the information that depends on the user.
+It is important to point out that, from all the information which can be gathered from each entry of the log, not every field (or feature) is dependant on the user. Table \ref{featuretype} shows the set of initial features extracted from the log of connections. For each feature, its type is indicated and also the dependency with the user. This first study over the features can help to the feature selection, because what matters for identifying non desirable users behaviour, would be the information that depends on the user.
 
 \begin{table*}[htpb]
 \centering
@@ -184,12 +184,13 @@ It is important to point out that, from all the information which can be gathere
 \texttt{other\_char\_in\_filename} & Numeric & Dependent \\  
 \texttt{file\_extension} & Categorical & Dependent \\  
 \texttt{url\_protocol} & Categorical & Dependent \\ 
-\texttt{client\_address} & Categorical & Dependent \\ 
-\texttt{label} & Categorical & Independent \\
+\texttt{client\_address} & Categorical & Dependent \\
 \hline
 \end{tabular}
 }
 \end{table*}
+
+Then, every original rule covers a number of entries, and so a class is applied to them. This class is a `label' with two possible values: `allow', or `deny'. An `allow' class is applied to an entry when that entry suffices the conditions of a rule which permits the connection, or because the URL is included in the Whitelist. On the contrary, the `deny' class is assigned to those entries that are not permitted by the company, then, they will fit the rules that forbid those connections, or their URLs will be included in the Blacklist.
 
 %----------------------------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   METODOLOGY  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -198,15 +199,26 @@ It is important to point out that, from all the information which can be gathere
 \section{Metodology}
 \label{sec:metodology}
 
-*** Describir la metodología a seguir para la creación de los juegos de datos:
-- preprocesado
-- etiquetado para componer datos a clasificar
-- técnicas de balanceo
+In order to have the extracted information in a proper way to train and test the classifiers, a preprocessing is performed over both log and rules files. From now on, we treat Black and White lists as set of rules too, given the fact that we can express every entry of those lists as:
 
-*** Describir los 3 grandes bloques y justificarlos:
-- Datos iniciales
-- Características extraídas
-- Sesiones
+\begin{verbatim}
+IF
+url = some_allowed_or_denied_url
+THEN
+allow/deny
+\end{verbatim}
+
+%*** Describir la metodología a seguir para la creación de los juegos de datos:
+%- preprocesado
+%- etiquetado para componer datos a clasificar
+%- técnicas de balanceo
+
+%*** Describir los 3 grandes bloques y justificarlos:
+%- Datos iniciales
+%- Características extraídas
+%- Sesiones
+
+All Java code for the realisation of this work is available at Github \cite{github:site}. % Short url http://git.io/4cQYFQ
 
 %---------------------------------------------------------------------
 \subsection{Initial Data}
