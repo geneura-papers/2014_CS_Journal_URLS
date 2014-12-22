@@ -199,14 +199,10 @@ Then, every original rule covers a number of entries, and so a class is applied 
 \section{Metodology}
 \label{sec:metodology}
 
-In order to have the extracted information in a proper way to train and test the classifiers, a preprocessing is performed over both log and rules files. From now on, we treat Black and White lists as set of rules too, given the fact that we can express every entry of those lists as:
+This Section is devoted to look over the steps that have been followed the realisation of different sets of experiments, in order to perform a deep study of the classifiers and data configurations. An experiment consists of obtaining a dataset configuration, a certain classifier, and trainining and test it to see the accuracy results.
 
-\begin{verbatim}
-IF
-url = some_allowed_or_denied_url
-THEN
-allow/deny
-\end{verbatim}
+The first and usual step %paloma: reference here pls paloma noteolvides 
+is to preprocess all data and extract the information to have it in a way easy to work with. From the initial files, a connection log and a set of rules, we obtain a dataset with the data being processed and the rule decisions being applied. The nature of this dataset forces the application of some techniques for producing other datasets. In addition, the results of the experiments justify the creation of new datasets, as will be explained in further subsections.
 
 %*** Describir la metodología a seguir para la creación de los juegos de datos:
 %- preprocesado
@@ -224,7 +220,30 @@ All Java code for the realisation of this work is available at Github \cite{gith
 \subsection{Initial Data}
 \label{subsec:initial_data}
 
-*** Describir los primeros datos y procesamientos (eliminar duplicados, agrupar redundantes, etc)
+In order to have the extracted information in a proper way to train and test the classifiers, a preprocessing is performed over both log and rules files. From now on, we treat Black and White lists as set of rules too, given the fact that we can express every entry of those lists as:
+
+\begin{verbatim}
+IF
+url = some_allowed_or_denied_url
+THEN
+allow/deny
+\end{verbatim}
+
+In a certain rule, the antecedents are expressed in the first place. They are the conditions that must be met in order to apply a decision. The antecedent for Black and White lists and in the example is \textit{url = some\_allowed\_or\_denied\_url}, but there can be as much conditions as needed in a rule. Specialization of a rule is when it has a lot of conditions and covers a few patterns, while generalisation of rules means to have rules with less conditions but covering more patterns.
+
+Our main goal is to be able to obtain rules with the ability to label connection patterns as allowed or denied, and that the conditions of those rules are not dependant on the URL. Thus, after the preprocessing and having extracted all the knowledge from the Log and the Rules, the entries in the Log can be labelled.
+
+The initial Log file has ----- connection patterns. At the end of the labelling process, a dataset is formed with ----- connection patterns, now with an `allow' or `deny' class assigned. The labelling process yields to ----- allowed patterns and ----- denied patterns. This dataset will be used for training and testing the classifiers.
+
+As can be seen in the ratio between allowed and denied patterns, the dataset is unbalanced and that can bias classification results \cite{maimon2005data}. There exist numerous techniques for balancing datasets, but here we have used two techniques that are mentioned in \cite{imbalance_techniques_02}. More specifically, these techniques are:
+
+\begin{itemize}
+   \item \textbf{Undersampling}. By this technique, the patterns of the majority class are reduced proportionally until both classes have the similar amount of patterns. This pattern removal has been performed randomly \cite{random_undersampling_08} and for that reason, three different balanced datasets have been created and tested, so that at the end the results have a mean and a standard deviation. Of course, removing patterns has a main disadvantage, which is the loss of information.
+   \item \textbf{Oversampling}. On the contrary, with this method the patterns in the minority class are increased. Sometimes the difference between classes is filled with synthetic data \cite{smote_02}. When the features are numerical, is easier to introduce synthetic data similar to the extisting, because the differences between patterns can be numerically measured. In our case, most of the features are categorical so that is hard to create synthetic data. Then, the connection patterns of the minority class (allow) are doubled.
+\end{itemize}
+
+
+%*** Describir los primeros datos y procesamientos (eliminar duplicados, agrupar redundantes, etc)
 
 
 %---------------------------------------------------------------------
