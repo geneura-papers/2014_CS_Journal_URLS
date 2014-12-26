@@ -244,8 +244,10 @@ allow/deny
 
 <<<<<<< HEAD
 In a certain rule, the antecedents are expressed in the first place. They are the conditions that must be met in order to apply a decision. The antecedent for Black and White lists and in the example is \textit{url = some\_allowed\_or\_denied\_url}, but there can be as much conditions as needed in a rule. Specialization of a rule is when it has a lot of conditions and covers a few patterns, while generalisation of rules means to have rules with less conditions but covering more patterns. %no estoy muy segura de esto último REVISAR
+% Yo diría que es correcto, pero no he leído el resto, no sé si viene
+% a cuento - JJ
 
-Our main goal is to be able to obtain rules with the ability to label connection patterns as allowed or denied, and that the conditions of those rules are not dependant on the URL. Thus, after the preprocessing and having extracted all the knowledge from the Log and the Rules, the entries in the Log can be labelled.
+Our main goal is to be able to obtain rules with the ability to label connection patterns as allowed or denied, and that the conditions of those rules are not dependant on the URL. Thus, after the preprocessing and having extracted all the knowledge from the log and the rules, the entries in the Log can be labelled.
 
 The initial Log file has 100000 connection patterns. At the end of the labelling process, a dataset is formed with 58778 connection patterns, now with an `allow' or `deny' class assigned. The labelling process yields to 39044 allowed patterns and 19734 denied patterns. This dataset will be used for training and testing the classifiers, but before, is the one used for a first overview of the classifiers we intend to work with.
 
