@@ -254,31 +254,6 @@ The initial Log file has 100000 connection patterns. At the end of the labelling
 We have focused in two types of classifiers: rule based and tree based. This decision was based in the fact that 50\% of the features in every instance of the dataset is categorical. In order to measure the distance between two values of a categorical feature, one can use the Hamming or the Levenshtein distance \cite{chudnovsky2008method}, but this could work only for some features such as subdomains, for example. Furthermore, there are also numerical features. Then, we needed classifiers able to work with both numerical and categorical feature types.
 Besides, they were chosen because its a set of rules what we aim to obtain. Also, the set of rules that these type of classifier generate from the training dataset helps with the feature selection.
 This work has been developed in Java along with the Weka tool \cite{weka:site}, as it has several different classifiers of each type.
-=======
-The antecedents constitute the left hand side of the rule. They are
-the conditions that must be met in order to apply a decision. The
-antecedent for Black and White lists and in the example is \textit{url
-  = some\_allowed\_or\_denied\_url}, but there can be as many
-pre-conditions as needed in a rule. Specialization of a rule is when
-it has a lot of conditions and covers a few patterns, while
-generalisation of rules implies having rules with less conditions but
-covering more patterns. %no estoy muy segura de esto último REVISAR 
-% Yo diría que es correcto, pero no he leído el resto, no sé si viene
-% a cuento - JJ
-
-Our main goal is to be able to obtain rules with the ability to label
-navigation patterns as allowed or denied, and that the conditions of
-those rules are not dependant on the URL. Thus, after the
-preprocessing and having extracted all the knowledge from the Log and
-the Rules, the entries in the Log can be labelled. 
-% why capitals? - JJ
-
-The initial Log file has 100000 connection patterns. At the end of the
-labelling process, a dataset is formed by 58778 connection patterns,
-now with an `allow' or `deny' class assigned. The labelling process
-yields 39044 allowed patterns and 19734 denied patterns. This dataset
-will be used for training and testing the classifiers. 
->>>>>>> 96b59a757fc2fb161d6cb2e5134d6d44914e9d33
 
 As can be seen in the ratio between allowed and denied patterns, the dataset is unbalanced and that can bias classification results \cite{maimon2005data}. There exist numerous techniques for balancing datasets, but here we have used two techniques that are mentioned in \cite{imbalance_techniques_02}. More specifically, these techniques are:
 
