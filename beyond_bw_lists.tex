@@ -82,7 +82,7 @@ The paper is structured as follows: related work about enterprise network securi
 
 The datasets that have been traditionally used for this kind of studies are the original KDD 99 Cup Dataset \cite{kddcup99}, and its improved version NSL KDD \cite{nslkdd}. Both are detailed by Tavallaee, Mahbod et al. \cite{tavallaee2009detailed}, and the first constists of a group of connection logs from a normal network, with simulated attack traffic added. The second version, which may be called as improved or refined, had the same log of connections from the initial dataset, but having removed the redundant traffic. This means that there might have been duplicated records in the original dataset that could mislead the results after the training and testing processes.
 
-In our work we make a similar approach. As will be deeply explained in Section \ref{sec:metodology}, we also removed the duplicated entries from the connections log. However, the main advantage of the data we have used with respect to the others used in previous works, is that we obtained the log directly from an actual company, thus we are working with more accurate datasets than those which include simulated traffic.
+In our work we make a similar approach. As will be deeply explained in Section \ref{sec:methodology}, we also removed the duplicated entries from the connections log. However, the main advantage of the data we have used with respect to the others used in previous works, is that we obtained the log directly from an actual company, thus we are working with more accurate datasets than those which include simulated traffic.
 
 %URL classification
 
@@ -233,7 +233,11 @@ In a certain rule, the antecedents are expressed in the first place. They are th
 
 Our main goal is to be able to obtain rules with the ability to label connection patterns as allowed or denied, and that the conditions of those rules are not dependant on the URL. Thus, after the preprocessing and having extracted all the knowledge from the Log and the Rules, the entries in the Log can be labelled.
 
-The initial Log file has 100000 connection patterns. At the end of the labelling process, a dataset is formed with 58778 connection patterns, now with an `allow' or `deny' class assigned. The labelling process yields to 39044 allowed patterns and 19734 denied patterns. This dataset will be used for training and testing the classifiers.
+The initial Log file has 100000 connection patterns. At the end of the labelling process, a dataset is formed with 58778 connection patterns, now with an `allow' or `deny' class assigned. The labelling process yields to 39044 allowed patterns and 19734 denied patterns. This dataset will be used for training and testing the classifiers, but before, is the one used for a first overview of the classifiers we intend to work with.
+
+We have focused in two types of classifiers: rule based and tree based. This decision was based in the fact that 50\% of the features in every instance of the dataset is categorical. In order to measure the distance between two values of a categorical feature, one can use the Hamming or the Levenshtein distance \cite{chudnovsky2008method}, but this could work only for some features such as subdomains, for example. Furthermore, there are also numerical features. Then, we needed classifiers able to work with both numerical and categorical feature types.
+Besides, they were chosen because its a set of rules what we aim to obtain. Also, the set of rules that these type of classifier generate from the training dataset helps with the feature selection.
+This work has been developed in Java along with the Weka tool \cite{weka:site}, as it has several different classifiers of each type.
 
 As can be seen in the ratio between allowed and denied patterns, the dataset is unbalanced and that can bias classification results \cite{maimon2005data}. There exist numerous techniques for balancing datasets, but here we have used two techniques that are mentioned in \cite{imbalance_techniques_02}. More specifically, these techniques are:
 
@@ -241,6 +245,8 @@ As can be seen in the ratio between allowed and denied patterns, the dataset is 
    \item \textbf{Undersampling}. By this technique, the patterns of the majority class are reduced proportionally until both classes have the similar amount of patterns. This pattern removal has been performed randomly \cite{random_undersampling_08} and for that reason, three different balanced datasets have been created and tested, so that at the end the results have a mean and a standard deviation. Of course, removing patterns has a main disadvantage, which is the loss of information.
    \item \textbf{Oversampling}. On the contrary, with this method the patterns in the minority class are increased. Sometimes the difference between classes is filled with synthetic data \cite{smote_02}. When the features are numerical, is easier to introduce synthetic data similar to the extisting, because the differences between patterns can be numerically measured. In our case, most of the features are categorical so that is hard to create synthetic data. Then, the connection patterns of the minority class (allow) are doubled.
 \end{itemize}
+
+Then, having three datasets with the initial data, one unbalanced and two balanced with different methods, and 9 rule based plus 7 tree based classifiers, the datasets are tested by a 10-fold cross-validation process. This means that every dataset is divided in 10 equal parts and that the classifier will be trained an tested 10 times: each time it is trained with 9 of the 10 parts and the 10th is for testing \cite{Frank2011}. After the 10 generations, the results are calculated by averaging. This process is necessary to see classifiers' behaviour with the type of data we are working with. Also, Naïve Bayes classifier \cite{Bayesian_Classifier_97} has been included as a reference for both its simplicity and good results with all data types.
 
 
 %*** Describir los primeros datos y procesamientos (eliminar duplicados, agrupar redundantes, etc)
