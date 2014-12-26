@@ -124,8 +124,7 @@ Being introduced in Section \ref{sec:intro}, the problem this work addresses is 
 The data used to demonstrate this has been provided by an actual Spanish company and it has been anonymized. Since our purpose is to have a dataset with a set of connections of which it is already known its permission, we have used two different files:
 
 \begin{itemize}
-   \item A log file with the connections made by employees of the company. % ¿El de 2 horas o el de 1 día?
-   This log contains the typical information of an HTTP request, it is gathered by the company Squid proxy \cite{squid:site}, and its format is CSV. 
+   \item A log file with the connections made by employees of the company. The data inside this log file were gathered along a period of two hours, from 8.30 to 10.30 am (30 minutes after the workday starts), monitoring the activity of all the employees in a medium-size Spanish company (80-100 people), obtaining 100000 patterns. We consider this dataset quite complete because it contains a very diverse amount of connection patterns, going from personal (traditionally addressed at the first hour of work) to professional issues (the rest of the day). This log contains the typical information of an HTTP request, it is gathered by the company Squid proxy \cite{squid:site}, and its format is CSV. 
    \item A set of rules wich decide, mostly depending on the URL core domain, if a connection should be allowed (Whitelist) or denied (Blacklist). The rules have been provided by the same company.
  \end{itemize} 
 
@@ -200,7 +199,7 @@ Then, every original rule covers a number of entries, and so a class is applied 
 
 This Section is devoted to look over the steps that have been followed the realisation of different sets of experiments, in order to perform a deep study of the classifiers and data configurations. An experiment consists of obtaining a dataset configuration, a certain classifier, and trainining and test it to see the accuracy results.
 
-The first and usual step \cite{Frank2011} is to preprocess all data and extract the information to have it in a way easy to work with. From the initial files, a connection log and a set of rules, we obtain a dataset with the data being processed and the rule decisions being applied. The nature of this dataset forces the application of some techniques for producing other datasets. In addition, the results of the experiments justify the creation of new datasets, as will be explained in further subsections.
+The first and usual step \cite{Frank2011} is to preprocess all data and extract the information to have it in a way easy to work with. From the initial files, a connection log and a set of rules, we obtain a dataset with the data being processed and the rule decisions being applied. The nature of this dataset forces the application of some techniques for producing other datasets. In addition, the very results of the experiments justify the creation of new datasets, as will be explained in further subsections.
 
 %*** Describir la metodología a seguir para la creación de los juegos de datos:
 %- preprocesado
@@ -231,7 +230,7 @@ In a certain rule, the antecedents are expressed in the first place. They are th
 
 Our main goal is to be able to obtain rules with the ability to label connection patterns as allowed or denied, and that the conditions of those rules are not dependant on the URL. Thus, after the preprocessing and having extracted all the knowledge from the Log and the Rules, the entries in the Log can be labelled.
 
-The initial Log file has ----- connection patterns. At the end of the labelling process, a dataset is formed with ----- connection patterns, now with an `allow' or `deny' class assigned. The labelling process yields to ----- allowed patterns and ----- denied patterns. This dataset will be used for training and testing the classifiers.
+The initial Log file has 100000 connection patterns. At the end of the labelling process, a dataset is formed with 58778 connection patterns, now with an `allow' or `deny' class assigned. The labelling process yields to 39044 allowed patterns and 19734 denied patterns. This dataset will be used for training and testing the classifiers.
 
 As can be seen in the ratio between allowed and denied patterns, the dataset is unbalanced and that can bias classification results \cite{maimon2005data}. There exist numerous techniques for balancing datasets, but here we have used two techniques that are mentioned in \cite{imbalance_techniques_02}. More specifically, these techniques are:
 
