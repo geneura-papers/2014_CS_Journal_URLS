@@ -229,7 +229,7 @@ THEN
 allow/deny
 \end{verbatim}
 
-In a certain rule, the antecedents are expressed in the first place. They are the conditions that must be met in order to apply a decision. The antecedent for Black and White lists and in the example is \textit{url = some\_allowed\_or\_denied\_url}, but there can be as much conditions as needed in a rule. Specialization of a rule is when it has a lot of conditions and covers a few patterns, while generalisation of rules means to have rules with less conditions but covering more patterns.
+In a certain rule, the antecedents are expressed in the first place. They are the conditions that must be met in order to apply a decision. The antecedent for Black and White lists and in the example is \textit{url = some\_allowed\_or\_denied\_url}, but there can be as much conditions as needed in a rule. Specialization of a rule is when it has a lot of conditions and covers a few patterns, while generalisation of rules means to have rules with less conditions but covering more patterns. %no estoy muy segura de esto último REVISAR
 
 Our main goal is to be able to obtain rules with the ability to label connection patterns as allowed or denied, and that the conditions of those rules are not dependant on the URL. Thus, after the preprocessing and having extracted all the knowledge from the Log and the Rules, the entries in the Log can be labelled.
 
