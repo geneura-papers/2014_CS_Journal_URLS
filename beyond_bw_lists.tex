@@ -62,8 +62,7 @@ With this scenario, companies need to be able to update their Blacklists and Whi
 
 This work shows that this can be achieved by using categorical classifiers. It is possible to gather information from the log files that the companies proxies store, and also from the set of Company Security Policies (CSPs), in order to be able of label the entries of the log and obtain a data set. That data set has been the one used for training and testing a set of chosen classifiers, being all of them capable of support categorical data given the nature of the information in a URL connection log file. We will show how the classifiers have obtained rules, for classifying unknown URLs, that are built with more antecedents than the URL only, as normal Black and White lists do.
 
-The paper is structured as follows...
-
+The paper is structured as follows: related work about enterprise network security, how Data Mining and Machine Learning techniques help to maintain it, and about URL classification methods, is discussed in Section 2. Section 3 provides a deeper description of the problem we aim to solve, as well as the used data and its composition. Then, after presenting the different operations performed over the initial data in Section 4, Section 5 describes the different sets of conducted experiments, in which the resulted datasets from Section 4 are tested with different classifiers. Results of those experiments are addressed in Section 6. Finally, in Section 7 we look over the conclusions of this work and give an overview about how to further continue our research in the future.
 %----------------------------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%   BACKGROUND AND RELATED WORK %%%%%%%%%%%%%%%%%%%%%%%
 %----------------------------------------------------------------------------
@@ -196,8 +195,8 @@ Then, every original rule covers a number of entries, and so a class is applied 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   METODOLOGY  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %----------------------------------------------------------------------------
 
-\section{Metodology}
-\label{sec:metodology}
+\section{Methodology}
+\label{sec:methodology}
 
 This Section is devoted to look over the steps that have been followed the realisation of different sets of experiments, in order to perform a deep study of the classifiers and data configurations. An experiment consists of obtaining a dataset configuration, a certain classifier, and trainining and test it to see the accuracy results.
 
