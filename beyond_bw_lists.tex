@@ -261,7 +261,53 @@ As can be seen in the ratio between allowed and denied patterns, the dataset is 
    \item \textbf{Oversampling}. On the contrary, with this method the patterns in the minority class are increased. Sometimes the difference between classes is filled with synthetic data \cite{smote_02}. When the features are numerical, is easier to introduce synthetic data similar to the extisting, because the differences between patterns can be numerically measured. In our case, most of the features are categorical so that is hard to create synthetic data. Then, the connection patterns of the minority class (allow) are doubled.
 \end{itemize}
 
-Then, having three datasets with the initial data, one unbalanced and two balanced with different methods, and 9 rule based plus 7 tree based classifiers, the datasets are tested by a 10-fold cross-validation process. This means that every dataset is divided in 10 equal parts and that the classifier will be trained an tested 10 times: each time it is trained with 9 of the 10 parts and the 10th is for testing \cite{Frank2011}. After the 10 generations, the results are calculated by averaging. This process is necessary to see classifiers' behaviour with the type of data we are working with. Also, Naïve Bayes classifier \cite{Bayesian_Classifier_97} has been included as a reference for both its simplicity and good results with all data types.
+Then, having three datasets with the initial data, one unbalanced and two balanced with different methods, and 9 rule based plus 7 tree based classifiers, the datasets are tested by a 10-fold cross-validation process. This means that every dataset is divided in 10 equal parts and that the classifier will be trained an tested 10 times: each time it is trained with 9 of the 10 parts and the 10th is for testing \cite{Frank2011}. After the 10 generations, the results are calculated by averaging. This process is necessary to see classifiers' behaviour with the type of data we are working with. Also, Naïve Bayes classifier \cite{Bayesian_Classifier_97} has been included as a reference for both its simplicity and good results with all data types. Table \ref{tabresults_todos} shows %something that I'll explain on monday
+
+\begin{table}[htpb]
+\centering 
+{\small
+\begin{tabular}{|l|c|c|}
+\cline{2-3}
+\multicolumn{1}{l|}{} & Undersampling & Oversampling \\ 
+\hline
+Naïve Bayes & 91.02 $\pm$ 0.10 & 91.77 \\ 
+\cline{1-1}
+Conjunctive Rule & 60.00 $\pm$ 0.14 & 60.02 \\ 
+\cline{1-1}
+Decision Table & 94.31 $\pm$ 0.20 & 90.29 \\ 
+\cline{1-1}
+DTNB & 94.92 $\pm$ 0.14 & 95.65 \\ 
+\cline{1-1}
+JRip & 90.03 $\pm$ 0.07 & 92.47 \\ 
+\cline{1-1}
+NNge & \textbf{96.47} $\pm$ 0.02 & \textbf{98.76} \\ 
+\cline{1-1}
+One R & 93.53 $\pm$ 0.08 & 93.70 \\ 
+\cline{1-1}
+PART & \textbf{96.35} $\pm$ 0.09 & \textbf{97.54} \\ 
+\cline{1-1}
+Ridor & 86.60 $\pm$ 0.55 & 89.87 \\ 
+\cline{1-1}
+Zero R & 51.22 $\pm$ 0.16 & 51.26 \\ 
+\cline{1-1}
+AD Tree & 77.65 $\pm$ 0.08 & 77.68 \\ 
+\cline{1-1}
+Decision Stump & 60.00 $\pm$ 0.14 & 60.02 \\ 
+\cline{1-1}
+J48 & \textbf{96.99} $\pm$ 0.04 & \textbf{98.00} \\ 
+\cline{1-1}
+LAD Tree & 78.93 $\pm$ 1.71 & 79.97 \\ 
+\cline{1-1}
+Random Forest & \textbf{96.94} $\pm$ 0.07 & \textbf{98.84} \\ 
+\cline{1-1}
+Random Tree & 95.59 $\pm$ 0.40 & 98.35 \\ 
+\cline{1-1}
+REP Tree & \textbf{96.74} $\pm$ 0.04 & \textbf{97.67} \\ 
+\hline
+\end{tabular}
+}
+\caption[Global classification methods ranking. Classifiers are trained and tested by crossvalidation.]{\label{tabresults_todos} Results of all tested classification methods on balanced data. The best ones are marked in boldface.}
+\end{table}
 
 
 %*** Describir los primeros datos y procesamientos (eliminar duplicados, agrupar redundantes, etc)
