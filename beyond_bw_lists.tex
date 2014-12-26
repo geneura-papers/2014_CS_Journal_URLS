@@ -16,8 +16,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   TITLE   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{[TENTATIVE] Can I navigate this web? Controlling URL accesses in the enterprise by means of categorical classifiers}
-
+\title{[TENTATIVE] Should I navigate this web? Controlling access in the enterprise using categorical classifiers}
+%No se deben usar acrónimos en el título - JJ
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   AUTHORS   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \author{P. de las Cuevas, A.M. Mora, J.J. Merelo}
@@ -53,9 +53,21 @@ Black List \sep White Lists \sep Data Mining \sep Corporate Security Policies \s
 \section{Introduction}
 \label{sec:intro}
 
-The concept of Security inside an Enterprise can be addressed from the point of view of the Internet connections that are daily being made. The employees who make these might have working purposes or not. The Enterprise, which is aware of this situation, wants to reduce the risks of security attacks introduced by some non trustworthy websites. Then, on a second level, but still important, companies want their employees to not to have their productivity decreased.
-
-Above all the security tools that enterprises normally use, in this paper we want to focus on those named as Blacklists and Whitelists. Their use is widely extended, as they are easy to maintain, and each one has its advantages and disadvantages. The use of both highly increases the security in a company.
+The concept of Security inside an Enterprise can be addressed from the
+point of view of the Internet connections that are daily being
+made. The employees who make these might have working purposes or
+not. The Enterprise, which is aware of this situation, wants to reduce
+the risks of security attacks introduced by some non trustworthy
+websites. Then, on a second, but still important level, companies want
+to keep their employees productive and focused. % No acabo de entender
+                                % el uso de mayúsculas - JJ
+Above all the security tools that enterprises normally use, in this
+paper we want to focus on Blacklists and Whitelists. %Sigo sin
+                                %entenderlo. Si es una definición,
+                                %cursivas - JJ
+ Their use is widely extended, as they are easy to maintain, % easy to
+                                % maintain? - JJ
+and each one has its advantages and disadvantages. The use of both highly increases the security in a company.
 Indeed it is true that both Blacklists and Whitelists are easy to update or to maintain, because every day, new bad sites are reported. But at the same time, new sites (dangerous or not) are created. Netcraft reports from November \cite{netcraft:site} show that there are about 950 million active websites. But McAfee reported \cite{mcafee:site} that, at the end of the first quarter of 2014, there were more than 18 million new suspect URLs (2 million associated domains), and also more than 250 thousand new pishing URL (almost 150 thousand associated domains).
 
 With this scenario, companies need to be able to update their Blacklists and Whitelists not only by what is reported by security servers but also by learning from the connections that the employees made in the past and were known as dangerous. This way, anomalous situations can be detected and also classified as candidates for the Blacklist or the Whitelist.
@@ -229,11 +241,29 @@ THEN
 allow/deny
 \end{verbatim}
 
-In a certain rule, the antecedents are expressed in the first place. They are the conditions that must be met in order to apply a decision. The antecedent for Black and White lists and in the example is \textit{url = some\_allowed\_or\_denied\_url}, but there can be as much conditions as needed in a rule. Specialization of a rule is when it has a lot of conditions and covers a few patterns, while generalisation of rules means to have rules with less conditions but covering more patterns. %no estoy muy segura de esto último REVISAR
+The antecedents constitute the left hand side of the rule. They are
+the conditions that must be met in order to apply a decision. The
+antecedent for Black and White lists and in the example is \textit{url
+  = some\_allowed\_or\_denied\_url}, but there can be as many
+pre-conditions as needed in a rule. Specialization of a rule is when
+it has a lot of conditions and covers a few patterns, while
+generalisation of rules implies having rules with less conditions but
+covering more patterns. %no estoy muy segura de esto último REVISAR 
+% Yo diría que es correcto, pero no he leído el resto, no sé si viene
+% a cuento - JJ
 
-Our main goal is to be able to obtain rules with the ability to label connection patterns as allowed or denied, and that the conditions of those rules are not dependant on the URL. Thus, after the preprocessing and having extracted all the knowledge from the Log and the Rules, the entries in the Log can be labelled.
+Our main goal is to be able to obtain rules with the ability to label
+navigation patterns as allowed or denied, and that the conditions of
+those rules are not dependant on the URL. Thus, after the
+preprocessing and having extracted all the knowledge from the Log and
+the Rules, the entries in the Log can be labelled. 
+% why capitals? - JJ
 
-The initial Log file has 100000 connection patterns. At the end of the labelling process, a dataset is formed with 58778 connection patterns, now with an `allow' or `deny' class assigned. The labelling process yields to 39044 allowed patterns and 19734 denied patterns. This dataset will be used for training and testing the classifiers.
+The initial Log file has 100000 connection patterns. At the end of the
+labelling process, a dataset is formed by 58778 connection patterns,
+now with an `allow' or `deny' class assigned. The labelling process
+yields 39044 allowed patterns and 19734 denied patterns. This dataset
+will be used for training and testing the classifiers. 
 
 As can be seen in the ratio between allowed and denied patterns, the dataset is unbalanced and that can bias classification results \cite{maimon2005data}. There exist numerous techniques for balancing datasets, but here we have used two techniques that are mentioned in \cite{imbalance_techniques_02}. More specifically, these techniques are:
 
