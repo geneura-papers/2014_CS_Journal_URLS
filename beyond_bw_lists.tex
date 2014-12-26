@@ -92,7 +92,7 @@ Hence, Kan and Thi \cite{Kan_URL05} focus their work in lexical features in orde
 
 On the other hand, this work not only focuses in lexical features of the requested URL, but also in other data that appears in the log files. And not exactly log data but Zhang et al. \cite{Zhang_cantina07}, with CANTINA, detect pishing URLs by studying lexical features, content related features, and a WHOIS query (obtaining the date when the domain were registered, which if it is too new, it can be less trustful). They also obtain a 95\% of accuracy.
 
-The most important work we have found related to this were of J. Ma et al \cite{Ma_Url11}, whose aim is to detect malicious URLs, mainly related with pishing attacks throug e-mailing, but without processing the content or other private data of the user. They extract information from the lexical features (62\% of the total of the gathered features), and also from the host that has the URL. It is important to point out that they perform the study over 100 days, and that they work with a quantity of almost 2 million of features. In addition, they implement an online classifier (instead of a batch one), and obtain a 99\% of accuracy. 
+The most important work we have found related to this were of J. Ma et al \cite{Ma_Url11}, whose aim is to detect malicious URLs, mainly related with pishing attacks throug e-mailing, but without processing the content or other private data of the user. They extract information from the lexical features (62\% of the total of the gathered features), and also from the host that has the URL. It is important to point out that they perform the study over 100 days, and that they work with a quantity of almost 2 million of features. In addition, they implement an online classifier (instead of a batch one), and obtain a 99\% of accuracy.
 
 %Crime data mining and forensics in enterprise (?)
 
@@ -136,7 +136,8 @@ http://www.subdomain5.....subdomain1.url_core.url_TLD/folder1/.../
 /filename.filename_extension
 \end{verbatim}
 
-Thus a lot of features can be obtained from the URL string.
+Thus a lot of features can be obtained from the URL string. Those can be lexical or non-lexical features. We name as lexical those features which are extracted from the characteristics of the URL string \cite{Kan_URL05}, such as URL string length, how many subdomains it has, how many letters or numbers are in the whole string, or if it contains folders or parameters. The non-lexical features of a URL can vary from the type of content of the website the user is accessing, to the properties of the host which contains the site \cite{Ma_Url11}. Here we have focused in lexical features, as most of the reviewed related works use this kind of features in their classification studies, and also for time reasons. When a new URL does not have an assigned class and we want to now if it should be allowed or denied, it much faster to analyse its lexical features than to gather its non-lexical properties.
+
 It is important to point out that, from all the information which can be gathered from each entry of the log, not every field (or feature) is dependant on the user. Table \ref{featuretype} shows the set of initial features extracted from the log of connections. For each feature, its type is indicated and also the dependency with the user. This first study over the features can help to the feature selection, because what matters for identifying non desirable users behaviour, would be the information that depends on the user.
 
 \begin{table*}[htpb]
@@ -189,6 +190,8 @@ It is important to point out that, from all the information which can be gathere
 \end{table*}
 
 Then, every original rule covers a number of entries, and so a class is applied to them. This class is a `label' with two possible values: `allow', or `deny'. An `allow' class is applied to an entry when that entry suffices the conditions of a rule which permits the connection, or because the URL is included in the Whitelist. On the contrary, the `deny' class is assigned to those entries that are not permitted by the company, then, they will fit the rules that forbid those connections, or their URLs will be included in the Blacklist.
+
+Even though the whole methodology is detailed in the next Section, it is important to note now that in addition to the creation of a dataset with the labelled entries, it must be studied how to divide it in training and test datasets. For this reason, before we reach our main goal, we need to find a proper way to treat the initial dataset, and also to obtain a test setup that maximises the accuracy results and provides a good set of rules to demonstrate this work main purpose.
 
 %----------------------------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   METODOLOGY  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
