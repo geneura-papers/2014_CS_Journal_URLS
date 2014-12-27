@@ -65,15 +65,19 @@ Above all the security tools that enterprises normally use, in this
 paper we want to focus on blacklists and whitelists. %Sigo sin
                                 %entenderlo. Si es una definición,
                                 %cursivas - JJ
- Their use is widely extended, as it is easy to maintain them, % easy to
-                                % maintain? - JJ
+ Their use is widely extended, as it is easy to maintain them, 
+                                % easy to maintain? - JJ
                                 % (Paloma) sí, es correcto, pero lo cambio si no se entiende bien
+                                % Si se dice que se usan mucho, debería ponerse alguna referencia  [Pedro]
 and each one has its advantages and disadvantages. The use of both highly increases the security in a company.
 Indeed it is true that both blacklists and whitelists are easy to update or to maintain, because every day, new bad sites are reported. But at the same time, new sites (dangerous or not) are created. Netcraft reports from November \cite{netcraft:site} show that there are about 950 million active websites. But McAfee reported \cite{mcafee:site} that, at the end of the first quarter of 2014, there were more than 18 million new suspect URLs (2 million associated domains), and also more than 250 thousand new pishing URL (almost 150 thousand associated domains).
 
 With this scenario, companies need to be able to update their blacklists and whitelists not only by what is reported by security servers but also by learning from the connections that the employees made in the past and were known as dangerous. This way, anomalous situations can be detected and also classified as candidates for the blacklist or the whitelist.
 
-This work shows that this can be achieved by using categorical classifiers. It is possible to gather information from the log files that the companies proxies store, and also from the set of Company Security Policies (CSPs), in order to be able of label the entries of the log and obtain a data set. That data set has been the one used for training and testing a set of chosen classifiers, being all of them capable of support categorical data given the nature of the information in a URL connection log file. We will show how the classifiers have obtained rules, for classifying unknown URLs, that are built with more antecedents than the URL only, as normal Black and White lists do.
+% ¿y si se introduce este párrafo como sigue?  [Pedro]
+% In this work, using categorical classifiers to classify web sites is proposed.
+This work shows that this can be achieved by using categorical classifiers. 
+It is possible to gather information from the log files that the companies proxies store, and also from the set of Company Security Policies (CSPs), in order to be able of label the entries of the log and obtain a data set. That data set has been the one used for training and testing a set of chosen classifiers, being all of them capable of support categorical data given the nature of the information in a URL connection log file. We will show how the classifiers have obtained rules, for classifying unknown URLs, that are built with more antecedents than the URL only, as normal Black and White lists do. % yo los pondría en minúsculas [Pedro]
 
 The paper is structured as follows: related work about enterprise network security, how Data Mining and Machine Learning techniques help to maintain it, and about URL classification methods, is discussed in Section 2. Section 3 provides a deeper description of the problem we aim to solve, as well as the used data and its composition. Then, after presenting the different operations performed over the initial data in Section 4, Section 5 describes the different sets of conducted experiments, in which the resulted datasets from Section 4 are tested with different classifiers. Results of those experiments are addressed in Section 6. Finally, in Section 7 we look over the conclusions of this work and give an overview about how to further continue our research in the future.
 %----------------------------------------------------------------------------
