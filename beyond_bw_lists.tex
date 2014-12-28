@@ -67,25 +67,42 @@ the risks of security attacks introduced by some non trustworthy
 websites. Then, on a second, but still important level, companies want
 to keep their employees productive and focused. % No acabo de entender
                                 % el uso de mayúsculas - JJ
-Above all the security tools that enterprises normally use, in this
-paper we want to focus on blacklists and whitelists. %Sigo sin
+Above all the security tools that enterprises normally use, this paper is focused on the widely extended blacklists and whitelists. %Sigo sin
                                 %entenderlo. Si es una definición,
                                 %cursivas - JJ
- Their use is widely extended, as it is easy to maintain them, 
+% Antonio - intenta usar lo menos posible la primera persona, salvo cuando vayas a dar una opinión o comentar alguna decisión que se haya tomado para el desarrollo del artículo.
+They are commonly used in corporate security as it is easy to maintain them, 
                                 % easy to maintain? - JJ
                                 % (Paloma) sí, es correcto, pero lo cambio si no se entiende bien
                                 % Si se dice que se usan mucho, debería ponerse alguna referencia  [Pedro]
-and each one has its advantages and disadvantages. The use of both highly increases the security in a company.
-Indeed it is true that both blacklists and whitelists are easy to update or to maintain, because every day, new bad sites are reported. But at the same time, new sites (dangerous or not) are created. Netcraft reports from November \cite{netcraft:site} show that there are about 950 million active websites. But McAfee reported \cite{mcafee:site} that, at the end of the first quarter of 2014, there were more than 18 million new suspect URLs (2 million associated domains), and also more than 250 thousand new pishing URL (almost 150 thousand associated domains).
+and each one has its advantages and disadvantages. 
+% Antonio - no dejes frases 'a medias' como esta, complétala diciendo en este caso las ventajas y desventajas, si no, no lo menciones.
+The use of both highly increases the security in a company.
+Indeed it is true that both blacklists and whitelists are easy to update or to maintain, since every day new dangerous webs are reported. 
+% Antonio - intenta usar términos precisos. 'bad' puede ser un sitio peligroso, o simplemente malo en algún sentido, que puede no estar relacionado con la seguridad.
+But at the same time, hundreds of new sites (dangerous or not) are created. Netcraft reports from November \cite{netcraft:site} show that there are about 950 million of active websites. BIn addition McAfee reported \cite{mcafee:site} that, at the end of the first quarter of 2014, there were more than 18 million new suspect URLs (2 million associated domains), 
+and also more than 250 thousand new pishing URL (almost 150 thousand associated domains).
 
-With this scenario, companies need to be able to update their blacklists and whitelists not only by what is reported by security servers but also by learning from the connections that the employees made in the past and were known as dangerous. This way, anomalous situations can be detected and also classified as candidates for the blacklist or the whitelist.
+With this scenario, companies need to be able to update their blacklists and whitelists not only considering what is reported by security servers but also by learning from the connections that the employees made in the past and were known as dangerous. 
+% Antonio - esto no es que sea necesario, es que es la idea que se plantea. Hasta el momento no se ha hecho así. Yo lo diría de esa forma, planteándolo como una idea novedosa.
+This way, anomalous situations can be detected and also classified as candidates for the blacklist or the whitelist.
 
 % ¿y si se introduce este párrafo como sigue?  [Pedro]
 % In this work, using categorical classifiers to classify web sites is proposed.
-This work shows that this can be achieved by using categorical classifiers. 
-It is possible to gather information from the log files that the companies proxies store, and also from the set of Company Security Policies (CSPs), in order to be able of label the entries of the log and obtain a data set. That data set has been the one used for training and testing a set of chosen classifiers, being all of them capable of support categorical data given the nature of the information in a URL connection log file. We will show how the classifiers have obtained rules, for classifying unknown URLs, that are built with more antecedents than the URL only, as normal Black and White lists do. % yo los pondría en minúsculas [Pedro]
+This work shows that this can be achieved by means of categorical classifiers. 
+% Antonio - Yo no diría que el trabajo muestra algo. Mejor decir que se presenta un enfoque basado en eso y que los resultados son prometedores, es decir, muestran indicios de que funcionaría, pero es muy complicado hacer un clasificador en el que se pueda basar una empresa para añadir nuevas URLs tal cual... esto sería una herramienta más, que ayudaría, pero que no sustituiría al proceso que se haga actualmente, no sé si me explico.
+It is possible to gather information from the log files that the companies proxies store, and also from the set of Corporate Security Policies (CSPs), in order to be able to label the entries of the log and obtain a data set.
+% Esto no tiene nada que ver. Las políticas de seguridad no son necesarias. Nos basamos en listas blancas y negras, que definen, por defecto, reglas de seguridad muy simples, que son las que usamos en su momento. En el primer caso esto nos lo vendieron como CSPs, pero no son más que la correspondencia de dichas listas. Yo no mencionaría esto.
+% Esto es parte de la metodología más bien.
 
-The paper is structured as follows: related work about enterprise network security, how Data Mining and Machine Learning techniques help to maintain it, and about URL classification methods, is discussed in Section 2. Section 3 provides a deeper description of the problem we aim to solve, as well as the used data and its composition. Then, after presenting the different operations performed over the initial data in Section 4, Section 5 describes the different sets of conducted experiments, in which the resulted datasets from Section 4 are tested with different classifiers. Results of those experiments are addressed in Section 6. Finally, in Section 7 we look over the conclusions of this work and give an overview about how to further continue our research in the future.
+ That data set has been the one used for training and testing a set of chosen classifiers, being all of them capable of support categorical data given the nature of the information in a URL connection log file. We will show how the classifiers have obtained rules, for classifying unknown URLs, that are built with more antecedents than the URL only, as normal Black and White lists do. % yo los pondría en minúsculas [Pedro]
+
+% Antonio - hay que completar esta sección. Normalmente no hace falta describir el proceso que se seguirá (con mucho detalle), ni lo que se mirará en los resulatados, sino lo que se ha obtenido de forma general.
+% En todo caso, habría que hacer hincapié en la selección de características, en que nos apoyaremos en el usuario para hacer dicha selección, que se considerarán sesiones, etc.
+% También mencioar que el trabajo extiende el del ECTA y cómo lo extiende.
+
+The paper is structured as follows: related work about enterprise network security, how Data Mining and Machine Learning techniques help to maintain it, and about URL classification methods, is discussed in Section 2. Section 3 provides a deeper description of the problem we aim to solve, as well as the used data and their composition. Then, after presenting the different operations performed over the initial data in Section 4, Section 5 describes the different sets of conducted experiments, in which the resulted datasets from Section 4 are tested with different classifiers. Results of those experiments are addressed in Section 6. Finally, in Section 7 we look over the conclusions of this work and give an overview about how to further continue our research in the future.
+
 %----------------------------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%   BACKGROUND AND RELATED WORK %%%%%%%%%%%%%%%%%%%%%%%
 %----------------------------------------------------------------------------
