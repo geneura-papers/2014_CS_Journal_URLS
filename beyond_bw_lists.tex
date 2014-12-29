@@ -36,7 +36,7 @@
 \begin{abstract} 
 
 Many companies, concerned about the safety of the connections their employees establish to different web sites, implement different security techniques. 
-The most extended concern the use of blacklists and whitelists which, respectively, forbid or allow the access to the included URLs on them.
+One of the most extended involves use of blacklists and whitelists which, respectively, forbid or allow the access to the URLs included on them.
 Their main problem is the difficulty for maintaining them up to date, along with the low flexibility they offer.
 In this paper it is proposed a methodology for classifying unknown URLs as allowed or denied, based in previous accesses from the users to other sites.
 This has been done using categorical classifiers, also taking into account the user influence in the accesses. Thus, a subset of the considered features have been selected based in some criteria, such as their influence on the classifiers' obtained rules and on their dependence on the user's actions.
@@ -174,30 +174,42 @@ On the other hand, and more focused on the user side like our approach, there ex
 \label{sec:problem_data}
 
 %*** Definir el problema a resolver y describir los datos que se van a manejar en el mismo.
-Being introduced in Section \ref{sec:intro}, the problem this work addresses is the ability of self-adaptation that company network security systems have, for many new dangerous websites emerge every day. Corporate Security Policies (CSPs) may include Black and White lists to cope with dangerous situations, but always for known and already classified websites. Therefore, our goal is to demonstrate that is possible to automatically classify, as allowed or denied, a URL that was not in a blacklist or a whitelist. Also, we want that the final application of an `ALLOW' or `DENY' label depends on other features of that URL (lexical, or contextual, for instance), going then a step beyond the Black and White lists.
+The problem this work addresses is the ability of self-adaptation that company network security systems have, for many new dangerous websites emerge every day. Corporate Security Policies (CSPs) may include Black and White lists
+% Antonio - usar el término que se decida para las listas
+ to cope with dangerous situations, but always for known and already classified websites. 
+Thus, the goal of this paper is to demonstrate that is possible to automatically classify, as allowed or denied, a URL that was not in a blacklist or a whitelist. 
+% Antonio - Esto no hay que demostrarlo, esto a se ha hecho, como se ha dicho en el SotA. Lo que se quiere es proponer una metodología de cómo hacerlo, basándose además en el usuario, para obtener resultados que sean precisos y sobre todo fiables.
+Moreover the final application of an `ALLOW' or `DENY' label will depend on additional features of that URL, such as lexical, or contextual, for instance, going then a step beyond the Black and White lists.
 
-The data used to demonstrate this has been provided by an actual Spanish company and it has been anonymised. Since our purpose is to have a dataset with a set of connections of which it is already known its permission, we have used two different files:
+The (anonymised) data used in the study have been provided by an actual Spanish company.
+% Antonio - 'data' en este contexto se usa como plural
+They have been extracted from a log file with the connections made by employees of the company. The data inside this log file were gathered along a period of two hours, from 8.30 to 10.30 am (30 minutes after the workday starts), monitoring the activity of all the employees in a medium-size Spanish company (80-100 people), obtaining 100000 patterns. We consider this dataset quite complete because it contains a very diverse amount of connection patterns, going from personal (traditionally addressed at the first hour of work) to professional issues (the rest of the day). This log contains the typical information of an HTTP request, it is gathered by the company Squid proxy \cite{squid:site}. 
+% Antonio - Las cuestiones de formatos e implementación no son relevantes en este tipo de trabajos.
 
-\begin{itemize}
-   \item A log file with the connections made by employees of the company. The data inside this log file were gathered along a period of two hours, from 8.30 to 10.30 am (30 minutes after the workday starts), monitoring the activity of all the employees in a medium-size Spanish company (80-100 people), obtaining 100000 patterns. We consider this dataset quite complete because it contains a very diverse amount of connection patterns, going from personal (traditionally addressed at the first hour of work) to professional issues (the rest of the day). This log contains the typical information of an HTTP request, it is gathered by the company Squid proxy \cite{squid:site}, and its format is CSV. 
-   \item A set of rules wich decide, mostly depending on the URL core domain, if a connection should be allowed (whitelist) or denied (blacklist). The rules have been provided by the same company.
- \end{itemize} 
+There is also a set of Corporate Security Rules, most of them corresponding to black and whitelists decisions, and thus, denying or allowing the access to a specific URL based on its \textit{core domain}. However, there are a few of them also considering other features in the conditions, such as...
+% Antonio - poner oros factores que se tenían en cuenta, como que si era un vídeo no ocupase más de X bytes, etc (si lo estimamos oportuno)
+These rules have been provided by the same company.
 
-In order to have enough information to train the classifiers, we have taken as features the very same fields that the Squid log provides, being those of an HTTP request: the HTTP reply code and method, the time when the connection was made and how much did it take to the server to answer, the IP addresses of the client and requested server, the content type of the webpage and its size in bytes, and the complete URL string.
-At the same time, the URL has the following structure:
+In order to have enough information to train the classifiers, we have taken as initial features the same fields that the Squid log provides, being those of an HTTP request: the HTTP reply code and method, the time when the connection was made and how much did it take to the server to answer, the IP addresses of the client and requested server, the content type of the webpage and its size in bytes, and the complete URL string.
+The URL has the following structure:
 
 \begin{verbatim}
 http://www.subdomain5.....subdomain1.url_core.url_TLD/folder1/.../
 /filename.filename_extension
 \end{verbatim}
 
-Thus a lot of features can be obtained from the URL string. Those can be lexical or non-lexical features. We name as lexical those features which are extracted from the characteristics of the URL string \cite{Kan_URL05}, such as URL string length, how many subdomains it has, how many letters or numbers are in the whole string, or if it contains folders or parameters. The non-lexical features of a URL can vary from the type of content of the website the user is accessing, to the properties of the host which contains the site \cite{Ma_Url11}. Here we have focused in lexical features, as most of the reviewed related works use this kind of features in their classification studies, and also for time reasons. When a new URL does not have an assigned class and we want to now if it should be allowed or denied, it much faster to analyse its lexical features than to gather its non-lexical properties.
+Thus a lot of additional features can be obtained from the URL string, which can be lexical or non-lexical. We name as lexical those features which are extracted from the characteristics of the URL string \cite{Kan_URL05}, such as URL string length, how many subdomains it has, how many letters or numbers are in the whole string, or if it contains folders or parameters, for instance. The non-lexical features of a URL can vary from the type of content of the website the user is accessing, to the properties of the host which contains the site \cite{Ma_Url11}. Here we have focused in lexical features, as most of the reviewed related works use this type of variables in their classification studies, and also for computing time reasons. 
+When a decision for a new URL must be made, it is much faster to analyse its lexical features than to gather its non-lexical properties.
 
-It is important to point out that, from all the information which can be gathered from each entry of the log, not every field (or feature) is dependant on the user. Table \ref{featuretype} shows the set of initial features extracted from the log of connections. For each feature, its type is indicated and also the dependency with the user. This first study over the features can help to the feature selection, because what matters for identifying non desirable users behaviour, would be the information that depends on the user.
+% Antonio - antes de esto hay que justificar por qué nos interesa el usuario (en la intro también). Es decir, en la seguridad actual los usuarios son muy importantes, son una fuente de peligro 'desde dentro' que hay que controlar.
+% Los sistemas de seguridad se han planteado normalmente para evitar ataques externos, pero hay que cambiar el enfoque e ir considerando al empleado en el bucle
+It is important to point out that, from all the information which can be gathered from each entry of the log, not every field (or feature) is dependant on the user. Table \ref{featuretype} shows the set of initial features extracted from the log of connections. For each feature, its type is indicated and also the dependency with the user. 
+This first study over the features can help to the feature selection, because what matters for identifying non desirable users behaviour, would be the information that depends on the user.
+% Antonio - Esta segunda frase debe ir en otro lado, parte arriba (en esta sección y en la intro), donde se hable del usuario como amenaza, para justificar este trabajo y diferenciarlo del resto. Y otra parte (la de feature selection) más adelante, en la metodología.
 
 \begin{table*}[htpb]
 \centering
- \caption{\label{featuretype} Extracted features from each entry of the Log and its dependance or independance on the user behaviour.}
+ \caption{\label{featuretype} Extracted features from each entry of the Log and its dependance or independence on the user behaviour.}
 {\scriptsize
 \begin{tabular}{|l|l|l|}
 \hline
@@ -244,9 +256,14 @@ It is important to point out that, from all the information which can be gathere
 }
 \end{table*}
 
-Then, every original rule covers a number of entries, and so a class is applied to them. This class is a `label' with two possible values: `allow', or `deny'. An `allow' class is applied to an entry when that entry suffices the conditions of a rule which permits the connection, or because the URL is included in the whitelist. On the contrary, the `deny' class is assigned to those entries that are not permitted by the company, then, they will fit the rules that forbid those connections, or their URLs will be included in the blacklist.
+% Antonio - decir que el problema se transforma en un problema de clasificación y justificarlo. Ya se ha dicho antes, pero es en esta sección en la que hay que exponerlo y defenderlo.
+
+Then, every original security rule covers a number of entries, and so a class is applied to them. This class is a label with two possible values: `allow', or `deny'.
+% Antonio - unas veces están en mayúscula y otras no
+An `allow' class is applied to an entry when it suffices the conditions of a rule which permits the connection, or because the URL is included in the whitelist. On the contrary, the `deny' class is assigned to those entries that are not permitted by the company, then, they will fit the rules that forbid those connections, or their URLs will be included in the blacklist.
 
 Even though the whole methodology is detailed in the next Section, it is important to note now that in addition to the creation of a dataset with the labelled entries, it must be studied how to divide it in training and test datasets. For this reason, before we reach our main goal, we need to find a proper way to treat the initial dataset, and also to obtain a test setup that maximises the accuracy results and provides a good set of rules to demonstrate this work main purpose.
+% Antonio - Lo del balanceo ya no se va a hacer en este trabajo, creo yo.
 
 %----------------------------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   METODOLOGY  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
