@@ -16,8 +16,9 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   TITLE   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{[TENTATIVE] Should I navigate this web? Controlling access in the enterprise using categorical classifiers}
-%No se deben usar acrónimos en el título - JJ
+\title{Controlling URL accesses in the enterprise by means of user-focused categorical classifiers}
+% No se deben usar acrónimos en el título - JJ
+% Antonio - He puesto un título más serio y acorde con lo que se pretende hacer en el trabajo. El acrónimo de URL no lo vamos a desplegar, digo yo. Si queréis poned Web, pero vamos, que yo no lo veo mal así.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   AUTHORS   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \author{P. de las Cuevas, A.M. Mora, J.J. Merelo}
@@ -34,11 +35,14 @@
 %
 \begin{abstract} 
 
-Many companies, concerned about the safety of the connections their employees establish to different web services, implement different security techniques. 
-Some reduce security risks maintaining blacklists and whitelists of web services that employees might use.
-In the case of this technique, it is of great importance to determine whether an URL is dangerous or not.
-In this work we propose using categorical classifiers to classify connections to be added to the blacklist or the whitelist. These models give as a result a set of rules for classifying unknown URLs.
-Obtained results show that \textbf{COMENTAR LOS RESULTADOS OBTENIDOS}. %revisar que el resumen sea correcto (objetivos) y completar comentando en una frase los resultados obtenidos.  [Pedro]
+Many companies, concerned about the safety of the connections their employees establish to different web sites, implement different security techniques. 
+The most extended concern the use of blacklists and whitelists which, respectively, forbid or allow the access to the included URLs on them.
+Their main problem is the difficulty for maintaining them up to date, along with the low flexibility they offer.
+In this paper it is proposed a methodology for classifying unknown URLs as allowed or denied, based in previous accesses from the users to other sites.
+This has been done using categorical classifiers, also taking into account the user influence in the accesses. Thus, a subset of the considered features have been selected based in some criteria, such as their influence on the classifiers' obtained rules and on their dependence on the user's actions.
+This has been tested using real data gathered in an actual Spanish company, both at the access request and at the session level.
+The obtained results show that \textbf{COMENTAR LOS RESULTADOS OBTENIDOS}. %revisar que el resumen sea correcto (objetivos) y completar comentando en una frase los resultados obtenidos.  [Pedro]
+% Antonio - he intentado describir mejor lo que se hace (o se quiere hacer) en el trabajo.
 
 \end{abstract}
 
@@ -46,8 +50,10 @@ Obtained results show that \textbf{COMENTAR LOS RESULTADOS OBTENIDOS}. %revisar 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   KEYWORDS   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \begin{keyword}
-Black List \sep White Lists \sep Data Mining \sep Corporate Security Policies \sep URL request\sep Machine Learning \sep Classification.
+Black List \sep White Lists \sep Data Mining \sep Corporate Security Policies \sep URL request\sep User-based system \sep Classification
 \end{keyword}
+
+% Antonio - hay que elegir una terminología para las 'blacklists' y las 'whitelists' y usar siempre la misma. A veces están separadas las palabras, otras juntas, unas veces en mayúscula y otras en minúscula...
 
 \end{frontmatter}
 
@@ -97,9 +103,9 @@ It is possible to gather information from the log files that the companies proxi
 
  That data set has been the one used for training and testing a set of chosen classifiers, being all of them capable of support categorical data given the nature of the information in a URL connection log file. We will show how the classifiers have obtained rules, for classifying unknown URLs, that are built with more antecedents than the URL only, as normal Black and White lists do. % yo los pondría en minúsculas [Pedro]
 
-% Antonio - hay que completar esta sección. Normalmente no hace falta describir el proceso que se seguirá (con mucho detalle), ni lo que se mirará en los resulatados, sino lo que se ha obtenido de forma general.
+% Antonio - hay que completar esta sección. Normalmente no hace falta describir el proceso que se seguirá (con mucho detalle), ni lo que se mirará en los resultados, sino lo que se ha obtenido de forma general.
 % En todo caso, habría que hacer hincapié en la selección de características, en que nos apoyaremos en el usuario para hacer dicha selección, que se considerarán sesiones, etc.
-% También mencioar que el trabajo extiende el del ECTA y cómo lo extiende.
+% También mencionar que el trabajo extiende el del ECTA y cómo lo extiende.
 
 The paper is structured as follows: related work about enterprise network security, how Data Mining and Machine Learning techniques help to maintain it, and about URL classification methods, is discussed in Section 2. Section 3 provides a deeper description of the problem we aim to solve, as well as the used data and their composition. Then, after presenting the different operations performed over the initial data in Section 4, Section 5 describes the different sets of conducted experiments, in which the resulted datasets from Section 4 are tested with different classifiers. Results of those experiments are addressed in Section 6. Finally, in Section 7 we look over the conclusions of this work and give an overview about how to further continue our research in the future.
 
@@ -110,46 +116,55 @@ The paper is structured as follows: related work about enterprise network securi
 \section{Background and related work}
 \label{sec:background_sota}
 
-%*** Esta sección presentará conceptos de seguridad en la empresa, así como conceptos de machine learning y sus aplicaciones dentro de la seguridad corporativa, en concreto en aproximaciones similares a esta
-%Creo que no tiene que ver y es repetir lo mismo all over again
-
-*** Hay que diferenciar este trabajo de los existentes y destacar su avance en el estado del arte
 
 %Network and internet security in enterprises
 
 
 %Data
 
-The datasets that have been traditionally used for this kind of studies are the original KDD 99 Cup Dataset \cite{kddcup99}, and its improved version NSL KDD \cite{nslkdd}. Both are detailed by Tavallaee, Mahbod et al. \cite{tavallaee2009detailed}, and the first constists of a group of connection logs from a normal network, with simulated attack traffic added. The second version, which may be called as improved or refined, had the same log of connections from the initial dataset, but having removed the redundant traffic. This means that there might have been duplicated records in the original dataset that could mislead the results after the training and testing processes.
+The datasets that have been traditionally used for this kind of studies are the original KDD 99 Cup Dataset \cite{kddcup99}, and its improved version NSL KDD \cite{nslkdd}. Both are detailed by Tavallaee, Mahbod et al. \cite{tavallaee2009detailed}, and the first consists of a group of connection logs from a normal network, with simulated attack traffic added. The second version, which may be called as improved or refined, had the same log of connections from the initial dataset, but having removed the redundant traffic. This means that there might have been duplicated records in the original dataset that could mislead the results after the training and testing processes.
 
-In our work we make a similar approach. As will be deeply explained in Section \ref{sec:methodology}, we also removed the duplicated entries from the connections log. However, the main advantage of the data we have used with respect to the others used in previous works, is that we obtained the log directly from an actual company, thus we are working with more accurate datasets than those which include simulated traffic.
+The main advantage in the current work is that the data correspond to a log directly extracted from an actual company, thus these are more accurate datasets than those which include simulated traffic. These data have been also pre-processed for removing incorrect and duplicated data, as will be deeply explained in Section \ref{sec:methodology}. 
 
 %URL classification
 
-Also, in this work we are dedicating an important part to URL, its different parts and the way they influence in the classification process. We have reviewed some works related with the study of URLs. In particular, we found interesting those works that try to identify malicious sites (like the ones that want to perform a pishing attack). It is also interesting if they study the URL lexical features, like the one performed during this Master Thesis, and because we consider this kind of study better than to download and proccess the page (the thing that in fact is trying to be avoided). 
+The study dedicates an important part to URL, considering its different parts, the potential additional information that it provides, and the way it influences in a classification process. In this line, there exist some works related with the study of URLs. The most interesting ones are focused in trying to identify malicious sites (like the ones that want to perform a pishing attack). 
+% Antonio - poner aquí los trabajos que traten de identificación de URLs o sitios maliciosos.
 
-Hence, Kan and Thi \cite{Kan_URL05} focus their work in lexical features in order to classify as dangerous, URLs that were not previously in blacklists servers. They gather features like the URI components, length, ortographic data, or segments by entropy reduction. Their results are close to 95\% of accuracy.
+There are also other researches studying the URL lexical features (as it is proposed in this work), since we consider this kind of approaches better than to download and process the web (the thing that in fact is trying to be avoided). 
+% Antonio - lo que está entre paréntesis no sé si está bien expresado.
 
-On the other hand, this work not only focuses in lexical features of the requested URL, but also in other data that appears in the log files. And not exactly log data but Zhang et al. \cite{Zhang_cantina07}, with CANTINA, detect pishing URLs by studying lexical features, content related features, and a WHOIS query (obtaining the date when the domain were registered, which if it is too new, it can be less trustful). They also obtain a 95\% of accuracy.
+Hence, Kan and Thi \cite{Kan_URL05} focused their work in lexical features 
+% Antonio - ¿en qué exáctamente de las 'lexical features'?¿extracción, generación?
+in order to classify as dangerous, URLs that were not previously in blacklists servers. They gathered features such as the URI components, length, orthographic data, or segments by entropy reduction. Their results were close to 95\% of accuracy.
+% Antonio - ¿sobre qué datos trabajaron? Este artículo parece similar al nuestro y hay que buscarle los puntos débiles o lo que se mejora en el que presentamos nosotros.
 
-The most important work we have found related to this were of J. Ma et al \cite{Ma_Url11}, whose aim is to detect malicious URLs, mainly related with pishing attacks throug e-mailing, but without processing the content or other private data of the user. They extract information from the lexical features (62\% of the total of the gathered features), and also from the host that has the URL. It is important to point out that they perform the study over 100 days, and that they work with a quantity of almost 2 million of features. In addition, they implement an online classifier (instead of a batch one), and obtain a 99\% of accuracy.
+On the other hand, our work not only focuses in lexical features of the requested URL, but also in other data that appears in the log files. 
+% Antonio - Esto se refiere al nuestro, ¿no? Entonces hay que recalcar varias cosas: 1) que las 'lexical features' que consideramos son muchas más o, al menos, son diferentes (y puede que mejores), 2) que se considera un factor de influencia del usuario, 3) que el uso de otras variables del log mejora las referencias en las que se basa la clasificación.
+
+Zhang et al. \cite{Zhang_cantina07}, with the software named CANTINA, detected pishing URLs by studying lexical features, along with content related features, and a WHOIS query (obtaining the date when the domain were registered, which if it is too new, it can be less trustful). They also got a 95\% of accuracy.
+% Antonio - No todo se basa en porcentajes de acierto, y menos en este trabajo. Yo destacaría más bien si los resultados eran interesantes (para la empresa), si eran fiables, etc.
+
+Maybe the most important work in this research line was presented by J. Ma et al. \cite{Ma_Url11}, whose aim was to detect malicious URLs, mainly related with pishing attacks through e-mailing, but without processing the content or other private data of the user. They extracted information from the lexical features (62\% of the total amount of gathered features), and also from the host that has the URL. They performed the study over 100 days, and that they worked with a quantity of almost 2 million of features. In addition, they implemented an online classifier (instead of a batch one), and obtained a 99\% of accuracy.
+% Antonio - hay que intentar destacarse de este trabajo, señalar que nuestros datos son reales, que nuestras características son mejores, que se hace una selección user-based, etc. Alabar un trabajo no es buena idea si lo que se destaca son cosas en las que sobresale respecto al tuyo.
+
 
 %Crime data mining and forensics in enterprise (?)
 
-On the one hand, DM helped to develop new solutions to computer forensics \cite{DeVel2001}, being the researchers able to extract information from large files with events gathered from infected computers. Another important advance took place after the 9/11 events, when \textit{clustering techniques} and \textit{social network analysis} started to be performed in order to detect pontential crime networks \cite{Hsinchun2003}.
+% Antonio - No sé si esto tiene cabida en el trabajo. Quizá no, pero no estoy muy ducho en computer forensics para decidirlo. En todo caso hay que introducir el tema, no ponerlo de golpe.
+
+On the one hand, DM 
+% Antonio - DM supongo que es Data Mining. Esta es la primera vez que se nombra y habría que poner el término completo
+helped to develop new solutions to computer forensics \cite{DeVel2001}, being the researchers able to extract information from large files with events gathered from infected computers. Another important advance took place after the 9/11 events, when \textit{clustering techniques} and \textit{social network analysis} started to be performed in order to detect pontential crime networks \cite{Hsinchun2003}.
 On the other hand, and more focused on the user side like our approach, there exist some user-centric solutions to problems like user authentication in a personal device, who Greenstadt and Beal \cite{cognitive_security_08} proposed to address using collected user biometrics along with machine learning techniques.
 
 %feature extraction
 
-%---------------------------------------------------------------------
-%\subsection{Corporate Security}
-%\label{subsec:corporatesecurity}
+% Antonio - Esto es importante. Hay que mirar también métodos que se enfoquen en el usuario.
 
-%---------------------------------------------------------------------
-%\subsection{Machine Learning}
-%\label{subsec:dm+ml}
+% Machine Learning
 
-
+% Antonio - Si quieres meter cosas de estas en el estado del arte, en el artículo del GECCO hay un montón de referencias al uso de DM + ML en seguridad en la empresa. Incluso algunas pueden servir para mejorar algún párrafo anterior.
 
 %-------------------------------------------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%  PROBLEM DEFINITION  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
